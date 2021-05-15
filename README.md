@@ -14,4 +14,4 @@ OpenCV is used to detect faces in real-time using the Video Stream from the WebC
 [Dataset](https://data-flair.s3.ap-south-1.amazonaws.com/Data-Science-Data/face-mask-dataset.zip)
 
 ### Working demo
-![Alt text](face-mask-detector.gif "Signal processing")
+![Alt text](face-mask-detector-project.gif "Signal processing")
