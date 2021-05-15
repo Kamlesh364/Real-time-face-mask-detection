@@ -11,6 +11,8 @@ OpenCV is used to detect faces in real-time using the Video Stream from the WebC
 - [ResNet50_v2](https://www.geeksforgeeks.org/residual-networks-resnet-deep-learning/#:~:text=ResNet%2C%20which%20was%20proposed%20in%202015%20by%20researchers,we%20use%20a%20technique%20called%20skip%20connections%20.)
 - OpenCV
 
+### [Google Colab notebook](https://colab.research.google.com/drive/1CYFml4fKY137DYGM_Kr0CqkbLX4pB8ea?usp=sharing)
+
 [Dataset](https://data-flair.s3.ap-south-1.amazonaws.com/Data-Science-Data/face-mask-dataset.zip)
 
 ### Working demo
