@@ -3,6 +3,7 @@
 import cv2
 import numpy as np
 from keras.models import load_model
+from test import prepare_dataset_and_train_model
 model=load_model("./model2-005.model")
 
 labels_dict={0:'without mask',1:'mask'}
@@ -14,6 +15,8 @@ webcam = cv2.VideoCapture(0) # launching the webcam
 # loading the xml file to detect faces in a video stream
 classifier = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
 
+# loading pre-trained model from test.py
+model = prepare_dataset_and_train_model()
 while True:
     (rval, im) = webcam.read()
     im=cv2.flip(im,1,1) #Flipping to act as a mirror
