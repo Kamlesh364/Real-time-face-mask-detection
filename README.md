@@ -2,9 +2,9 @@
 
 This repository contains python code to detect faces with or without masks. 
 
-Concept of DeepNeuralNetworks is used to prepare the model to detect the faces with or without masks. And, to prepare the model I've used ResNet50_v2 architecture to prepare the CNN.
+Concept of DeepNeuralNetworks is used to prepare the model to detect the faces with or without masks. And, to prepare the model I've used `ResNet50_v2` architecture to prepare the CNN.
 
-OpenCV is used to detect faces in real-time using the Video Stream from the WebCam.
+`OpenCV` is used to detect faces in real-time using the Video Stream from the WebCam.
 
 ### Requirements
 - Tensorflow(>2.0)
@@ -21,6 +21,39 @@ OpenCV is used to detect faces in real-time using the Video Stream from the WebC
 
 ### How to start Detection -
 run "detection.py"
+
+### To use this repository with Bash
+#### 1. Download the repository
+```
+git clone https://github.com/Kamlesh364/Real-time-face-mask-detection.git
+```
+
+#### 2. Download the dataset
+```
+!wget https://data-flair.s3.ap-south-1.amazonaws.com/Data-Science-Data/face-mask-dataset.zip
+```
+
+#### 3. prepare the dataset
+- unzipping dataset
+```
+unzip face-mask-dataset.zip
+```
+- unzipping testing and training datasets
+```
+cd Dataset 
+unzip train.zip 
+unzip test.zip 
+rm -rf train.zip test.zip 
+cd .. 
+```
+- train the model to test it in real-time
+```
+python3 train.py
+```
+- test the model in real-time
+```
+python3 test.py
+```
 
 ### Working demo
 ![Alt text](face-mask-detector-project.gif "Signal processing")
