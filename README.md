@@ -13,15 +13,6 @@ Concept of DeepNeuralNetworks is used to prepare the model to detect the faces w
 
 ### [Google Colab notebook](https://colab.research.google.com/drive/1CYFml4fKY137DYGM_Kr0CqkbLX4pB8ea?usp=sharing)
 
-[Dataset](https://data-flair.s3.ap-south-1.amazonaws.com/Data-Science-Data/face-mask-dataset.zip)
-### to use the above dataset, follow the steps below
-- extract the "face-mask-dataset.zip" into the main project folder
-- go to the directory called "Dataset"(created after following above step)
-- unzip "train.zip" and "test.zip"( You can delete these zip files after extracting, to save space)
-
-### How to start Detection -
-run "detection.py"
-
 ### To use this repository with Bash
 #### 1. Download the repository
 ```
