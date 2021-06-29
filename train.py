@@ -137,49 +137,52 @@ def resnet_v2(input_shape, depth, num_classes = 2):
     # Instantiate model.
     model = Model(inputs = inputs, outputs = outputs)
     return model
-  
-  TRAINING_DIR = "./Dataset/train"
-train_datagen = ImageDataGenerator(rescale=1.0/255,
-                                   rotation_range=40,
-                                   width_shift_range=0.2,
-                                   height_shift_range=0.2,
-                                   shear_range=0.2,
-                                   zoom_range=0.2,
-                                   horizontal_flip=True,
-                                   fill_mode='nearest')
 
-train_generator = train_datagen.flow_from_directory(TRAINING_DIR, 
-                                                    batch_size=10, 
-                                                    target_size=(150, 150))
-VALIDATION_DIR = "./Dataset/test"
+def prepare_dataset_and_train_model():
+    TRAINING_DIR = "./Dataset/train"
+    train_datagen = ImageDataGenerator(rescale=1.0/255,
+                                       rotation_range=40,
+                                       width_shift_range=0.2,
+                                       height_shift_range=0.2,
+                                       shear_range=0.2,
+                                       zoom_range=0.2,
+                                       horizontal_flip=True,
+                                       fill_mode='nearest')
 
-validation_datagen = ImageDataGenerator(rescale=1.0/255)
+    train_generator = train_datagen.flow_from_directory(TRAINING_DIR, 
+                                                        batch_size=10, 
+                                                        target_size=(150, 150))
+    VALIDATION_DIR = "./Dataset/test"
 
-validation_generator = validation_datagen.flow_from_directory(VALIDATION_DIR, 
-                                                         batch_size=10, 
-                                                         target_size=(150, 150))
+    validation_datagen = ImageDataGenerator(rescale=1.0/255)
 
-model = resnet_v2(input_shape = (150, 150,3), depth = depth)
+    validation_generator = validation_datagen.flow_from_directory(VALIDATION_DIR, 
+                                                             batch_size=10, 
+                                                             target_size=(150, 150))
 
-model.compile(loss ='categorical_crossentropy',
-              optimizer = Adam(learning_rate = lr_schedule(0)),
-              metrics =['accuracy'])
+    model = resnet_v2(input_shape = (150, 150,3), depth = depth)
 
-# model.summary()
+    model.compile(loss ='categorical_crossentropy',
+                  optimizer = Adam(learning_rate = lr_schedule(0)),
+                  metrics =['accuracy'])
 
-# Prepare callbacks for model saving and for learning rate adjustment.
-checkpoint = ModelCheckpoint('model2-{epoch:03d}.model',monitor='val_loss',verbose=0,save_best_only=True,mode='auto')
-  
-lr_scheduler = LearningRateScheduler(lr_schedule)
-  
-lr_reducer = ReduceLROnPlateau(factor = np.sqrt(0.1),
-                               cooldown = 0,
-                               patience = 5,
-                               min_lr = 0.5e-6)
-  
-callbacks = [checkpoint, lr_reducer, lr_scheduler]
+    # model.summary()
 
-history = model.fit(train_generator,
-                          epochs=5,
-                          validation_data=validation_generator,
-                          callbacks=[checkpoint])
+    # Prepare callbacks for model saving and for learning rate adjustment.
+    checkpoint = ModelCheckpoint('model2-{epoch:03d}.model',monitor='val_loss',verbose=0,save_best_only=True,mode='auto')
+
+    lr_scheduler = LearningRateScheduler(lr_schedule)
+
+    lr_reducer = ReduceLROnPlateau(factor = np.sqrt(0.1),
+                                   cooldown = 0,
+                                   patience = 5,
+                                   min_lr = 0.5e-6)
+
+    callbacks = [checkpoint, lr_reducer, lr_scheduler]
+
+    history = model.fit(train_generator,
+                              epochs=5,
+                              validation_data=validation_generator,
+                              callbacks=[checkpoint])
+    
+    return model
